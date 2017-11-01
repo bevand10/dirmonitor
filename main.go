@@ -5,7 +5,7 @@ package main
  * Date   : 23 Oct '17
  *
  * Purpose: To monitor a local folder, watching for file events using iNotify.
- * Specifically, look for CLOSE events (CLOSE_WRITE is monitored).
+ * Specifically, trigger when CLOSE events have been received.
  *
  * Configured via 3 environment variables:
  *
@@ -13,7 +13,7 @@ package main
  *
  *   %%PATH%% will be replaced with the full pathname to the file concerned:
  *
- *   E.g. WORKFLOWURL=http://something.url/some/endpoint?path=%%PATH%%
+ *   E.g. WORKFLOWURL=http://something.url/some/endpoint.php?path=%%PATH%%
  *        WORKFLOWURL=http://something.url/rest/endpoint/action/%%PATH%%
  *
  *   FILESUFFIX=.xml - only call WORKFLOWURL for CLOSE events on files ending in $FILESUFFIX
@@ -102,7 +102,9 @@ func procEvent(event fsnotify.Event, workflowurl string, filesuffix string) {
 		if strings.HasSuffix(event.Name, filesuffix) {
 
 			p := strings.LastIndex(event.Name, filesuffix)
+			
 			wfurl := strings.Replace(workflowurl, "%%PATH%%", url.PathEscape(event.Name[:p]), -1)
+			
 			if strings.Contains(wfurl, "?") {
 				wfurl += "&FILESUFFIX=" + filesuffix
 			} else {
