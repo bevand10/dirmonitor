@@ -13,10 +13,10 @@ package main
  *
  *   %%PATH%% will be replaced with the full pathname to the file concerned:
  *
- *   WORKFLOWURL=http://something.url/some/endpoint?path=%%PATH%%  (param example)
- *   WORKFLOWURL=http://something.url/rest/endpoint/action/%%PATH%%  (REST example)
+ *   E.g. WORKFLOWURL=http://something.url/some/endpoint?path=%%PATH%%
+ *        WORKFLOWURL=http://something.url/rest/endpoint/action/%%PATH%%
  *
- *   FILESUFFIX=.xml - only call WORKFLOWURL for CLOSE_WRITE events on files ending in $FILESUFFIX
+ *   FILESUFFIX=.xml - only call WORKFLOWURL for CLOSE events on files ending in $FILESUFFIX
  *
  */
 import (
