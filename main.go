@@ -102,9 +102,9 @@ func procEvent(event fsnotify.Event, workflowurl string, filesuffix string) {
 		if strings.HasSuffix(event.Name, filesuffix) {
 
 			p := strings.LastIndex(event.Name, filesuffix)
-			
+
 			wfurl := strings.Replace(workflowurl, "%%PATH%%", url.PathEscape(event.Name[:p]), -1)
-			
+
 			if strings.Contains(wfurl, "?") {
 				wfurl += "&FILESUFFIX=" + filesuffix
 			} else {
