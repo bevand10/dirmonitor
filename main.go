@@ -118,16 +118,19 @@ func procEvent(event fsnotify.Event, workflowurl string, filesuffix string) {
 
 			retval, err := client.Get(wfurl)
 			if err != nil {
-				log.Println("Error:", err)
-			}
 
-			defer retval.Body.Close()
-			body, err := ioutil.ReadAll(retval.Body)
-			if err != nil {
 				log.Println("Error:", err)
-			}
 
-			log.Println("RESPONSE:", string(body))
+			} else {
+
+				defer retval.Body.Close()
+				body, err := ioutil.ReadAll(retval.Body)
+				if err != nil {
+					log.Println("Error:", err)
+				}
+
+				log.Println("RESPONSE:", string(body))
+			}
 		}
 	}
 }
